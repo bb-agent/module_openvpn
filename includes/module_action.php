@@ -44,21 +44,21 @@ if ($service != "") {
 		// COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "$bin_cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             
-			$exec = "$bin_chown fruitywifi:fruitywifi $mod_logs_history/*";
-			exec_fruitywifi($exec);
+			$exec = "$bin_chown blackbulb:blackbulb $mod_logs_history/*";
+			exec_blackbulb($exec);
 			
             $exec = "$bin_echo '' > $mod_logs";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
         }
 	
         //$exec = "openvpn --config client.ovpn --log $mod_logs --daemon > /dev/null &";
-		$exec = "$bin_openvpn --config client.ovpn --log $mod_logs --daemon openvpn-fruitywifi";
-        exec_fruitywifi($exec);
+		$exec = "$bin_openvpn --config client.ovpn --log $mod_logs --daemon openvpn-blackbulb";
+        exec_blackbulb($exec);
         
-		$exec = "$bin_chown fruitywifi:fruitywifi $mod_logs";
-        exec_fruitywifi($exec);
+		$exec = "$bin_chown blackbulb:blackbulb $mod_logs";
+        exec_blackbulb($exec);
 		
         $wait = 1;
 	    
@@ -68,18 +68,18 @@ if ($service != "") {
 		exec($exec,$output);
 		
 		$exec = "kill " . $output[0];
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		// COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "$bin_cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             
-			$exec = "$bin_chown fruitywifi:fruitywifi $mod_logs_history/*";
-			exec_fruitywifi($exec);
+			$exec = "$bin_chown blackbulb:blackbulb $mod_logs_history/*";
+			exec_blackbulb($exec);
 			
             $exec = "$bin_echo '' > $mod_logs";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
         }
     
     }
@@ -112,7 +112,7 @@ if ($upload == "upload") {
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 			echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 			$exec = "mv $target_file $target_dir_final";
-			exec_fruitywifi($exec);
+			exec_blackbulb($exec);
 		} else {
 			echo "Sorry, there was an error uploading your file.";
 		}
@@ -125,10 +125,10 @@ if ($upload == "upload") {
 if ($install == "install_$mod_name") {
 
     $exec = "$bin_chmod 755 install.sh";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 
     $exec = "$bin_sudo ./install.sh > $log_path/install.txt &";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 
     header('Location: ../../install.php?module='.$mod_name);
     exit;
