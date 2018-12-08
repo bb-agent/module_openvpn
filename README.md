@@ -1,4 +1,4 @@
 module_openvpn
 ============
 
-FruityWiFi OpenVPN module
+BlackBlulb OpenVPN module
